@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://34.27.79.153:5432/postgres
+    username: postgres
+    password: jdk83dav
