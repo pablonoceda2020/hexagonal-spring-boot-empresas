@@ -33,9 +33,12 @@ public class EnterprisePersistenceAdapter implements EnterprisePersistencePort {
 
   @Override
   public Enterprise membership(Enterprise enterprise) {
-    logger.trace("TRACE EnterprisePersistenceAdapter enterprise {}", enterprise.toString());
+    logger.trace("TRACE EnterprisePersistenceAdapter enterprise {}", enterprise);
     ZonedDateTime zonedBuenosAires = ZonedDateTime.now(ZONE_ID);
+
     enterprise.setMembershipDate(zonedBuenosAires.toLocalDateTime());
+
+
     return mapper.toEnterprise(
             enterpriseRepository.save(mapper.toEnterpriseEntity(enterprise)));
   }

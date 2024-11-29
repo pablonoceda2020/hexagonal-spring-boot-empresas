@@ -2,6 +2,7 @@ package com.hexa.challenge.application.service;
 
 import com.hexa.challenge.application.ports.input.EnterpriseServicePort;
 import com.hexa.challenge.application.ports.output.EnterprisePersistencePort;
+import com.hexa.challenge.domain.exception.EnterpriseNotFoundException;
 import com.hexa.challenge.domain.model.Enterprise;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EnterpriseService implements EnterpriseServicePort {
 
+
   private final EnterprisePersistencePort persistencePort;
 
   @Override
-  public Enterprise membership(Enterprise enterprise) {
+  public Enterprise membership(Enterprise enterprise) throws EnterpriseNotFoundException {
+    if (!isValidCUITCUIL(enterprise.getCuit()))
+      throw new EnterpriseNotFoundException();
     return persistencePort.membership(enterprise);
   }
 
@@ -26,5 +30,32 @@ public class EnterpriseService implements EnterpriseServicePort {
 
   @Override
   public List<Enterprise> latestAdditions() { return persistencePort.latestAdditions(); }
+
+
+  private boolean isValidCUITCUIL(String cuit){
+
+      if (cuit.length() != 13) return false;
+
+      boolean rv = false;
+      int resultado = 0;
+      String cuit_nro = cuit.replace("-", "");
+      String codes = "6789456789";
+      int verificador = Character.getNumericValue(cuit_nro.charAt(cuit_nro.length() - 1));
+      int x = 0;
+
+      while (x < 10)
+      {
+        int digitoValidador = Integer.parseInt(codes.substring(x, x+1));
+        int digito = Integer.parseInt(cuit_nro.substring(x, x+1));
+        int digitoValidacion = digitoValidador * digito;
+        resultado += digitoValidacion;
+        x++;
+      }
+      resultado = resultado % 11;
+      rv = (resultado == verificador);
+
+    return rv;
+  }
+
 
 }

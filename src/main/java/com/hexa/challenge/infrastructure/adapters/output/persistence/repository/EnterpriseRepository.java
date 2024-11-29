@@ -15,4 +15,6 @@ public interface EnterpriseRepository extends JpaRepository<EnterpriseEntity, Lo
     @Query("SELECT e FROM EnterpriseEntity  e WHERE e.membershipDate >= :startDate")
     List<EnterpriseEntity> findEnterpriseFromTheLastMonth(
             @Param("startDate") LocalDateTime startDate);
+
+
 }

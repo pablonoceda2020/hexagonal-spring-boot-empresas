@@ -29,6 +29,8 @@ import static com.hexa.challenge.infrastructure.adapters.input.rest.model.respon
 public class GlobalControllerAdvice {
 
   private static final Logger logger = LogManager.getLogger(GlobalControllerAdvice.class);
+  private static final String DESCRIPTION = "description";
+
 
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler(EnterpriseNotFoundException.class)
@@ -66,38 +68,38 @@ public class GlobalControllerAdvice {
 
     if (exception instanceof BadCredentialsException) {
       errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(401), exception.getMessage());
-      errorDetail.setProperty("description", "The username or password is incorrect");
+      errorDetail.setProperty(DESCRIPTION, "The username or password is incorrect");
       logger.error("Error The username or password is incorrect exception {} ", exception.getMessage());
       return errorDetail;
     }
 
     if (exception instanceof AccountStatusException) {
       errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-      errorDetail.setProperty("description", "The account is locked");
+      errorDetail.setProperty(DESCRIPTION, "The account is locked");
     }
 
     if (exception instanceof AccessDeniedException) {
       errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-      errorDetail.setProperty("description", "You are not authorized to access this resource");
+      errorDetail.setProperty(DESCRIPTION, "You are not authorized to access this resource");
     }
 
     if (exception instanceof SignatureException) {
       errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-      errorDetail.setProperty("description", "The JWT signature is invalid");
+      errorDetail.setProperty(DESCRIPTION, "The JWT signature is invalid");
     }
 
     if (exception instanceof ExpiredJwtException) {
       errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(403), exception.getMessage());
-      errorDetail.setProperty("description", "The JWT token has expired");
+      errorDetail.setProperty(DESCRIPTION, "The JWT token has expired");
     }
 
     if (errorDetail == null) {
       errorDetail = ProblemDetail.forStatusAndDetail(HttpStatusCode.valueOf(500), exception.getMessage());
-      errorDetail.setProperty("description", "Unknown internal server error.");
+      errorDetail.setProperty(DESCRIPTION, "Unknown internal server error.");
     }
 
 
-    logger.error("Error. Detail {} . exception {} ", errorDetail.getProperties().get("description").toString(), exception.getMessage());
+    logger.error("Error. Detail {} . exception {} ", errorDetail!= null && errorDetail.getProperties() != null && errorDetail.getProperties().get(DESCRIPTION) != null ? errorDetail.getProperties().get(DESCRIPTION).toString():"descrip", exception.getMessage());
     return errorDetail;
   }
 

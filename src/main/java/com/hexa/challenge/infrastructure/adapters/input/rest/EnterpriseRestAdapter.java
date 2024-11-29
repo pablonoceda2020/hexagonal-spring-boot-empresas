@@ -38,7 +38,8 @@ public class EnterpriseRestAdapter {
   public ResponseEntity<EnterpriseResponse> membership(@Valid @RequestBody EnterpriseCreateRequest request) {
     logger.debug("Debug Init POST /enterprises/v1/membership");
     logger.info("Init POST /enterprises/v1/membership");
-    logger.trace("TRACE Post /enterprises/v1/membership request {}", request.toString());
+    logger.trace("TRACE Post /enterprises/v1/membership request {}", request);
+
     return ResponseEntity.status(HttpStatus.CREATED)
             .body(restMapper.toEnterpriseResponse(
                     servicePort.membership(restMapper.toEnterprise(request))));

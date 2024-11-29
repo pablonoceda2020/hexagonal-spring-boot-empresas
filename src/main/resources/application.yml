@@ -15,9 +15,9 @@ spring:
     default-property-inclusion: non_null
     property-naming-strategy: SNAKE_CASE
   datasource:
-    url: jdbc:postgresql://localhost:5432/compose-postgres
+    url: jdbc:postgresql://34.27.79.153:5432/postgres
     username: postgres
-    password: postgres
+    password: jdk83dav
     driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
