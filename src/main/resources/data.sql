@@ -30,10 +30,10 @@ INSERT INTO enterprise_transfer_info_entity (id_transfer, amount, id_enterprise,
     (9, '46000', '6',  '1555544468988774658715', '1955544468988774658718','2023-10-19T16:35:49.123');
 
 INSERT INTO enterprise_transfer_info_entity (id_transfer, amount, id_enterprise, debit_account, credit_account, transaction_date) VALUES
-    (121, '46000', '2',  '1555544468988774658715', '1955544468988774658718','2024-10-19T16:35:49.123');
+    (121, '46000', '1',  '1555544468988774658715', '1955544468988774658718','2024-10-19T16:35:49.123');
 
 INSERT INTO enterprise_transfer_info_entity (id_transfer, amount, id_enterprise, debit_account, credit_account, transaction_date) VALUES
-    (111, '26000', '2',  '1255544468988774658715', '1855544468988774658718','2023-10-19T16:35:49.123');
+    (111, '26000', '1',  '1255544468988774658715', '1855544468988774658718','2023-10-19T16:35:49.123');
 
 INSERT INTO enterprise_transfer_info_entity (id_transfer, amount, id_enterprise, debit_account, credit_account, transaction_date) VALUES
     (931, '41000', '1',  '1555544468988774658715', '1955544468988774658718','2024-10-19T16:35:49.123');
