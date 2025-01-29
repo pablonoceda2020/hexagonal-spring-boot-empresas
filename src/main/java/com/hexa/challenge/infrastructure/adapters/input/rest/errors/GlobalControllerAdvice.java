@@ -1,5 +1,6 @@
 package com.hexa.challenge.infrastructure.adapters.input.rest.errors;
 
+import com.hexa.challenge.domain.exception.CUITNotFoundException;
 import com.hexa.challenge.domain.exception.EnterpriseNotFoundException;
 import com.hexa.challenge.infrastructure.adapters.input.rest.model.response.ErrorResponse;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -31,6 +32,17 @@ public class GlobalControllerAdvice {
   private static final Logger logger = LogManager.getLogger(GlobalControllerAdvice.class);
   private static final String DESCRIPTION = "description";
 
+
+  @ResponseStatus(HttpStatus.NOT_FOUND)
+  @ExceptionHandler(CUITNotFoundException.class)
+  public ErrorResponse handleCUITNotFoundException() {
+    logger.warn("An ERROR CUIT");
+    return ErrorResponse.builder()
+            .code(INVALID_CUIT.getCode())
+            .message(INVALID_CUIT.getMessage())
+            .timestamp(LocalDateTime.now())
+            .build();
+  }
 
   @ResponseStatus(HttpStatus.NOT_FOUND)
   @ExceptionHandler(EnterpriseNotFoundException.class)

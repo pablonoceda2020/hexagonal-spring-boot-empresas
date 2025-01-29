@@ -2,6 +2,7 @@ package com.hexa.challenge.application.service;
 
 import com.hexa.challenge.application.ports.input.EnterpriseServicePort;
 import com.hexa.challenge.application.ports.output.EnterprisePersistencePort;
+import com.hexa.challenge.domain.exception.CUITNotFoundException;
 import com.hexa.challenge.domain.exception.EnterpriseNotFoundException;
 import com.hexa.challenge.domain.model.Enterprise;
 import lombok.RequiredArgsConstructor;
@@ -17,9 +18,9 @@ public class EnterpriseService implements EnterpriseServicePort {
   private final EnterprisePersistencePort persistencePort;
 
   @Override
-  public Enterprise membership(Enterprise enterprise) throws EnterpriseNotFoundException {
+  public Enterprise membership(Enterprise enterprise) throws CUITNotFoundException {
     if (!isValidCUITCUIL(enterprise.getCuit()))
-      throw new EnterpriseNotFoundException();
+      throw new CUITNotFoundException();
     return persistencePort.membership(enterprise);
   }
 

@@ -26,7 +26,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @RequiredArgsConstructor
 @RequestMapping("/enterprises")
 @SecurityRequirement(name = "bearer-key")
-@Tag(name = "Clients")
+@Tag(name = "Enterprise")
 public class EnterpriseRestAdapter {
 
   private static final Logger logger = LogManager.getLogger(EnterpriseRestAdapter.class);
